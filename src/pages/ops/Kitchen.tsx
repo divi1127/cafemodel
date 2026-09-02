@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from "react";
+import { createElement, useEffect, useMemo, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import {
   CheckCircle2,
@@ -6,7 +6,6 @@ import {
   UtensilsCrossed,
   ShoppingBag,
   Truck,
-  AlertTriangle,
   RefreshCw,
 } from "lucide-react";
 import { useOrderStore } from "@/stores/orderStore";
@@ -102,7 +101,7 @@ function OrderCard({
       {/* Location + Time */}
       <div className="flex items-center justify-between text-xs text-white/50">
         <span className="flex items-center gap-1">
-          {icon && <icon size={11} />}
+          {icon && createElement(icon, { size: 11 })}
           {locationText}
         </span>
         <span className="flex items-center gap-1">

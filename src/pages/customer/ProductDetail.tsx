@@ -36,7 +36,7 @@ export default function ProductDetail() {
   const isFav = useFavoritesStore((s) => s.has);
 
   const [selectedVariant, setSelectedVariant] = useState<string>(
-    product?.variants?.[0]?.name ?? ""
+    product?.variants?.[0]?.id ?? ""
   );
   const [selectedAddons, setSelectedAddons] = useState<string[]>([]);
   const [qty, setQty] = useState(1);
@@ -54,9 +54,9 @@ export default function ProductDetail() {
             <p className="font-sans text-[var(--muted-foreground)]">
               The product you're looking for doesn't exist.
             </p>
-            <Button asChild variant="primary">
-              <Link to="/menu">Back to Menu</Link>
-            </Button>
+            <Link to="/menu">
+              <Button variant="primary">Back to Menu</Button>
+            </Link>
           </div>
         </div>
       </PageEntrance>
@@ -68,32 +68,28 @@ export default function ProductDetail() {
     .slice(0, 4);
 
   const variantPrice =
-    product.variants?.find((v) => v.name === selectedVariant)?.price ??
-    product.price;
+    product.price + (product.variants?.find((v) => v.id === selectedVariant)?.priceDelta ?? 0);
 
-  const addonTotal = selectedAddons.reduce((sum, name) => {
-    const addon = product.addons?.find((a) => a.name === name);
+  const addonTotal = selectedAddons.reduce((sum, id) => {
+    const addon = product.addons?.find((a) => a.id === id);
     return sum + (addon?.price ?? 0);
   }, 0);
 
   const totalPrice = (variantPrice + addonTotal) * qty;
 
-  const toggleAddon = (name: string) => {
+  const toggleAddon = (id: string) => {
     setSelectedAddons((prev) =>
-      prev.includes(name) ? prev.filter((a) => a !== name) : [...prev, name]
+      prev.includes(id) ? prev.filter((a) => a !== id) : [...prev, id]
     );
   };
 
   const handleAddToCart = () => {
     add({
       productId: product.id,
-      name: product.name,
-      price: variantPrice + addonTotal,
       quantity: qty,
-      variant: selectedVariant || undefined,
-      addons: selectedAddons.length ? selectedAddons : undefined,
-      instructions: instructions || undefined,
-      image: product.image,
+      variantId: selectedVariant || undefined,
+      addonIds: selectedAddons,
+      notes: instructions || undefined,
     });
     setAdded(true);
     setTimeout(() => setAdded(false), 2000);
@@ -128,7 +124,7 @@ export default function ProductDetail() {
               />
               {product.bestseller && (
                 <div className="absolute top-4 left-4">
-                  <Badge className="bg-[var(--primary)] text-[var(--primary-foreground)]">
+                  <Badge>
                     Bestseller
                   </Badge>
                 </div>
@@ -162,11 +158,11 @@ export default function ProductDetail() {
           <EntranceItem className="space-y-8">
             <div className="space-y-4">
               <div className="flex items-center gap-3">
-                <Badge variant="outline" className="text-[var(--primary)] border-[var(--primary)]/30">
+                <Badge tone="muted">
                   {categories.find((c) => c.id === product.category)?.name ?? product.category}
                 </Badge>
                 {!product.available && (
-                  <Badge variant="outline" className="text-[var(--danger)] border-[var(--danger)]/30">
+                  <Badge tone="danger">
                     Unavailable
                   </Badge>
                 )}
@@ -220,19 +216,19 @@ export default function ProductDetail() {
                 <div className="flex flex-wrap gap-3">
                   {product.variants.map((variant) => (
                     <motion.button
-                      key={variant.name}
-                      onClick={() => setSelectedVariant(variant.name)}
+                      key={variant.id}
+                      onClick={() => setSelectedVariant(variant.id)}
                       whileTap={{ scale: 0.95 }}
                       className={cn(
                         "px-5 py-3 rounded-xl border font-sans text-sm transition-all",
-                        selectedVariant === variant.name
+                        selectedVariant === variant.id
                           ? "border-[var(--primary)] bg-[var(--primary)]/10 text-[var(--primary)]"
                           : "border-[var(--border)] text-[var(--muted-foreground)] hover:border-[var(--muted-foreground)]"
                       )}
                     >
                       <span>{variant.name}</span>
                       <span className="ml-2 text-xs opacity-70">
-                        {formatInr(variant.price)}
+                        {formatInr(product.price + variant.priceDelta)}
                       </span>
                     </motion.button>
                   ))}
@@ -249,12 +245,12 @@ export default function ProductDetail() {
                 <div className="space-y-2">
                   {product.addons.map((addon) => (
                     <motion.button
-                      key={addon.name}
-                      onClick={() => toggleAddon(addon.name)}
+                      key={addon.id}
+                      onClick={() => toggleAddon(addon.id)}
                       whileTap={{ scale: 0.98 }}
                       className={cn(
                         "w-full flex items-center justify-between px-4 py-3 rounded-xl border text-left transition-all",
-                        selectedAddons.includes(addon.name)
+                        selectedAddons.includes(addon.id)
                           ? "border-[var(--primary)] bg-[var(--primary)]/10"
                           : "border-[var(--border)] hover:border-[var(--muted-foreground)]"
                       )}
@@ -263,12 +259,12 @@ export default function ProductDetail() {
                         <div
                           className={cn(
                             "w-5 h-5 rounded border flex items-center justify-center transition-colors",
-                            selectedAddons.includes(addon.name)
+                            selectedAddons.includes(addon.id)
                               ? "bg-[var(--primary)] border-[var(--primary)]"
                               : "border-[var(--border)]"
                           )}
                         >
-                          {selectedAddons.includes(addon.name) && (
+                          {selectedAddons.includes(addon.id) && (
                             <Check className="h-3 w-3 text-[var(--primary-foreground)]" />
                           )}
                         </div>
@@ -355,11 +351,7 @@ export default function ProductDetail() {
             {product.tags.length > 0 && (
               <div className="flex flex-wrap gap-2 pt-4">
                 {product.tags.map((tag) => (
-                  <Badge
-                    key={tag}
-                    variant="outline"
-                    className="text-xs font-sans text-[var(--muted-foreground)]"
-                  >
+                  <Badge key={tag} tone="muted">
                     {tag}
                   </Badge>
                 ))}

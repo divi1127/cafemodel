@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { Package, Clock, ArrowRight, Hash } from "lucide-react";
+import { Clock, ArrowRight, Hash } from "lucide-react";
 import { Link } from "react-router-dom";
 import { PageEntrance, EntranceItem } from "@/components/animations/PageEntrance";
 import { ScrollReveal } from "@/components/animations/ScrollReveal";
@@ -45,7 +45,6 @@ function ProgressTracker({ status }: { status: OrderStatus }) {
       <div className="flex gap-1.5">
         {statusFlow.map((s, i) => {
           const reached = !isTerminal && activeIdx >= i;
-          const current = !isTerminal && activeIdx === i;
           return (
             <div key={s} className="flex-1 h-1.5 rounded-full overflow-hidden bg-[var(--border)]">
               <motion.div
@@ -66,13 +65,13 @@ function ProgressTracker({ status }: { status: OrderStatus }) {
       <div className="flex justify-between">
         {statusFlow.map((s, i) => {
           const reached = !isTerminal && activeIdx >= i;
-          const current = !isTerminal && activeIdx === i;
+          const isCurrent = !isTerminal && activeIdx === i;
           return (
             <span
               key={s}
               className={cn(
                 "font-sans text-[10px] uppercase tracking-wider transition-colors",
-                current
+                isCurrent
                   ? "text-[var(--primary)] font-semibold"
                   : reached
                     ? "text-[var(--foreground)]"
@@ -86,7 +85,7 @@ function ProgressTracker({ status }: { status: OrderStatus }) {
       </div>
 
       {isCancelled && (
-        <Badge tone="danger" className="mt-2">
+        <Badge tone="danger">
           Cancelled
         </Badge>
       )}
@@ -136,12 +135,12 @@ export default function OrderTracking() {
                 body="When you place an order, you'll be able to track it here in real time."
                 action={
                   <MagneticButton strength={0.3}>
-                    <Button asChild variant="primary" className="px-8">
-                      <Link to="/menu">
+                    <Link to="/menu">
+                      <Button variant="primary" className="px-8">
                         Order Something
                         <ArrowRight className="ml-2 h-4 w-4" />
-                      </Link>
-                    </Button>
+                      </Button>
+                    </Link>
                   </MagneticButton>
                 }
               />
