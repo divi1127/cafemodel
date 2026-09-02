@@ -1,0 +1,52 @@
+import type { Review } from "@/types";
+
+export const reviews: Review[] = [
+  {
+    id: "rv1",
+    customer: "Meera Shah",
+    productId: "p4",
+    rating: 5,
+    title: "The cappuccino I measure others against",
+    body: "Texture like velvet, chocolate in the finish. The room is quiet enough to hear the steam.",
+    date: "2026-08-12",
+    approved: true,
+  },
+  {
+    id: "rv2",
+    customer: "Arjun Patel",
+    productId: "p13",
+    rating: 5,
+    title: "Burger and espresso — unexpectedly perfect",
+    body: "Smash is crisp, sauce is restrained. I came for coffee and stayed for lunch.",
+    date: "2026-08-08",
+    approved: true,
+  },
+  {
+    id: "rv3",
+    customer: "Nina Kapoor",
+    productId: "p3",
+    rating: 5,
+    title: "Kenya on V60",
+    body: "Jasmine and blackcurrant, as promised. Staff talked about the lot like it mattered.",
+    date: "2026-07-30",
+    approved: true,
+  },
+  {
+    id: "rv4",
+    customer: "Rahul Iyer",
+    rating: 4,
+    title: "Evenings glow",
+    body: "Lighting, music, and the pizza. Service was a touch slow on Saturday.",
+    date: "2026-08-20",
+    approved: true,
+  },
+  {
+    id: "rv5",
+    customer: "Guest",
+    rating: 3,
+    title: "Needs more seating",
+    body: "Coffee is excellent. Waited 25 minutes for a two-top.",
+    date: "2026-08-22",
+    approved: false,
+  },
+];
