@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { AlertTriangle, Package, Truck, ArrowDownToLine, ArrowUpFromLine, Trash2, ShoppingCart, CircleAlert } from "lucide-react";
+import { AlertTriangle, ArrowDownToLine, ArrowUpFromLine, CircleAlert } from "lucide-react";
 import { cn, formatInr } from "@/lib/utils";
 import {
   inventory as seedInventory,
@@ -157,7 +157,6 @@ export default function Inventory() {
                   </thead>
                   <tbody>
                     {items.map((item) => {
-                      const pct = stockPercent(item);
                       const isLow = item.stock <= item.reorderAt;
                       return (
                         <tr key={item.id} className="border-t border-[var(--border)] transition hover:bg-white/4">

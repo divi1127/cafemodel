@@ -19,7 +19,7 @@ import { categories } from "@/data/categories";
 import { offers } from "@/data/offers";
 import { gallery } from "@/data/analytics";
 import { reviews } from "@/data/reviews";
-import { cn, formatInr } from "@/lib/utils";
+import { cn } from "@/lib/utils";
 import { IMG } from "@/lib/images";
 import heroVideo from "@/assets/hero-video.mp4";
 
@@ -121,19 +121,19 @@ export default function Home() {
                 </p>
                 <div className="flex flex-col xs:flex-row sm:flex-row gap-3 sm:gap-4">
                   <MagneticButton strength={0.3}>
-                    <Button asChild variant="primary" className="w-full sm:w-auto px-8 py-5 sm:py-6 text-base">
-                      <Link to="/menu">
+                    <Link to="/menu">
+                      <Button variant="primary" className="w-full sm:w-auto px-8 py-5 sm:py-6 text-base">
                         Explore Menu
                         <ArrowRight className="ml-2 h-4 w-4" />
-                      </Link>
-                    </Button>
+                      </Button>
+                    </Link>
                   </MagneticButton>
                   <MagneticButton strength={0.3}>
-                    <Button asChild variant="ghost" className="w-full sm:w-auto px-8 py-5 sm:py-6 text-base border border-white/30 text-white hover:bg-white/10">
-                      <Link to="/reservations">
+                    <Link to="/reservations">
+                      <Button variant="ghost" className="w-full sm:w-auto px-8 py-5 sm:py-6 text-base border border-white/30 text-white hover:bg-white/10">
                         Reserve a Table
-                      </Link>
-                    </Button>
+                      </Button>
+                    </Link>
                   </MagneticButton>
                 </div>
               </div>
@@ -237,12 +237,12 @@ export default function Home() {
           </div>
           <ScrollReveal>
             <div className="text-center mt-12">
-              <Button asChild variant="line" className="px-8">
-                <Link to="/menu">
+              <Link to="/menu">
+                <Button variant="line" className="px-8">
                   View Full Menu
                   <ArrowRight className="ml-2 h-4 w-4" />
-                </Link>
-              </Button>
+                </Button>
+              </Link>
             </div>
           </ScrollReveal>
         </div>
@@ -309,12 +309,12 @@ export default function Home() {
                   className="font-display text-3xl sm:text-4xl lg:text-5xl font-bold text-[var(--foreground)]"
                 />
               </div>
-              <Button asChild variant="line" className="hidden sm:inline-flex self-start sm:self-auto">
-                <Link to="/offers">
+              <Link to="/offers">
+                <Button variant="line" className="hidden sm:inline-flex self-start sm:self-auto">
                   All Offers
                   <ArrowRight className="ml-2 h-4 w-4" />
-                </Link>
-              </Button>
+                </Button>
+              </Link>
             </div>
           </ScrollReveal>
           <div className="flex gap-6 overflow-x-auto pb-4 snap-x snap-mandatory scrollbar-hide">
@@ -332,8 +332,8 @@ export default function Home() {
                       className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
                     />
                     <div className="absolute top-4 left-4">
-                      <Badge className="bg-[var(--primary)] text-[var(--primary-foreground)]">
-                        {offer.type === "percentage" ? `${offer.value}% OFF` : `${formatInr(offer.value)} OFF`}
+                      <Badge>
+                        {offer.value}
                       </Badge>
                     </div>
                   </div>
@@ -417,12 +417,12 @@ export default function Home() {
                   className="font-display text-3xl sm:text-4xl lg:text-5xl font-bold text-[var(--foreground)]"
                 />
               </div>
-              <Button asChild variant="line" className="hidden sm:inline-flex self-start sm:self-auto">
-                <Link to="/gallery">
+              <Link to="/gallery">
+                <Button variant="line" className="hidden sm:inline-flex self-start sm:self-auto">
                   Full Gallery
                   <ArrowRight className="ml-2 h-4 w-4" />
-                </Link>
-              </Button>
+                </Button>
+              </Link>
             </div>
           </ScrollReveal>
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4">
@@ -531,12 +531,12 @@ export default function Home() {
               catch-up with friends, or an evening date — secure your spot at Aurelia.
             </p>
             <MagneticButton strength={0.3}>
-              <Button asChild variant="primary" className="w-full sm:w-auto px-10 py-5 sm:py-6 text-base">
-                <Link to="/reservations">
+              <Link to="/reservations">
+                <Button variant="primary" className="w-full sm:w-auto px-10 py-5 sm:py-6 text-base">
                   Reserve a Table
                   <ArrowRight className="ml-2 h-4 w-4" />
-                </Link>
-              </Button>
+                </Button>
+              </Link>
             </MagneticButton>
           </div>
         </ScrollReveal>

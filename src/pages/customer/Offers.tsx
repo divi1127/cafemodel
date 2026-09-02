@@ -7,11 +7,10 @@ import { TextReveal } from "@/components/animations/TextReveal";
 import { AnimatedBackground } from "@/components/animations/AnimatedBackground";
 import { Badge } from "@/components/ui/Card";
 import { offers } from "@/data/offers";
-import { cn, formatInr } from "@/lib/utils";
-import { useState as _useState } from "react";
+import { cn } from "@/lib/utils";
 
 function OfferValueDisplay({ offer }: { offer: (typeof offers)[number] }) {
-  if (offer.type === "percentage") {
+  if (offer.value.endsWith("%")) {
     return (
       <div className="flex items-center gap-1">
         <Percent className="h-6 w-6" />
@@ -163,7 +162,7 @@ export default function Offers() {
                             </code>
                             <motion.button
                               whileTap={{ scale: 0.9 }}
-                              onClick={() => copyCode(offer.code, offer.id)}
+                              onClick={() => copyCode(offer.code ?? "", offer.id)}
                               className="p-2 rounded-lg hover:bg-[var(--muted)] transition-colors text-[var(--muted-foreground)]"
                               title="Copy code"
                             >

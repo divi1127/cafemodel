@@ -2,8 +2,6 @@ import { useState, useMemo } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Search, X } from "lucide-react";
 import { PageEntrance, EntranceItem } from "@/components/animations/PageEntrance";
-import { ScrollReveal } from "@/components/animations/ScrollReveal";
-import { TextReveal } from "@/components/animations/TextReveal";
 import { AnimatedBackground } from "@/components/animations/AnimatedBackground";
 import { ProductCard } from "@/components/ui/ProductCard";
 import { Tabs } from "@/components/ui/Toast";

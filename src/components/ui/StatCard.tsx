@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from "react";
+import type { ReactNode } from "react";
 import { formatInr } from "@/lib/utils";
 
 export function StatCard({
@@ -6,11 +7,13 @@ export function StatCard({
   value,
   delta,
   hint,
+  icon,
 }: {
   label: string;
   value: number | string;
   delta?: number;
   hint?: string;
+  icon?: ReactNode;
 }) {
   const [shown, setShown] = useState(0);
   const numeric = typeof value === "number";
@@ -33,7 +36,10 @@ export function StatCard({
 
   return (
     <article className="border border-[var(--border)] bg-[var(--card)] p-5">
-      <p className="text-[11px] uppercase tracking-[0.2em] text-[var(--muted-foreground)]">{label}</p>
+      <div className="flex items-start justify-between gap-3">
+        <p className="text-[11px] uppercase tracking-[0.2em] text-[var(--muted-foreground)]">{label}</p>
+        {icon ? <span className="text-[var(--primary)]">{icon}</span> : null}
+      </div>
       <p className="mt-3 font-display text-4xl">{numeric ? formatInr(shown) : value}</p>
       {delta != null ? (
         <p className={`mt-2 text-sm ${delta >= 0 ? "text-[var(--success)]" : "text-[var(--danger)]"}`}>
@@ -46,15 +52,18 @@ export function StatCard({
   );
 }
 
-export function DataTable<T extends { id: string }>({
+export function DataTable<T extends object>({
   rows,
+  data,
   columns,
   onRow,
 }: {
-  rows: T[];
-  columns: { key: string; label: string; render?: (row: T) => unknown }[];
+  rows?: T[];
+  data?: T[];
+  columns: { key: string; label?: string; header?: string; render?: (row: T) => unknown }[];
   onRow?: (row: T) => void;
 }) {
+  const all = (rows ?? data) ?? [];
   return (
     <div className="overflow-x-auto border border-[var(--border)]">
       <table className="w-full min-w-[640px] text-left text-sm">
@@ -62,21 +71,23 @@ export function DataTable<T extends { id: string }>({
           <tr>
             {columns.map((c) => (
               <th key={c.key} className="px-4 py-3 font-medium">
-                {c.label}
+                {c.label ?? c.header ?? c.key}
               </th>
             ))}
           </tr>
         </thead>
         <tbody>
-          {rows.map((row) => (
+          {all.map((row, index) => (
             <tr
-              key={row.id}
+              key={index}
               onClick={() => onRow?.(row)}
               className="border-t border-[var(--border)] transition hover:bg-white/4"
             >
               {columns.map((c) => (
                 <td key={c.key} className="px-4 py-3">
-                  {String(c.render ? c.render(row) : (row as Record<string, unknown>)[c.key] ?? "")}
+                  {c.render
+                    ? String(c.render(row) ?? "")
+                    : String((row as Record<string, unknown>)[c.key] ?? "")}
                 </td>
               ))}
             </tr>

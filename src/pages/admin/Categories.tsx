@@ -1,9 +1,10 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Plus, Pencil, Trash2, FolderOpen, X, Package } from "lucide-react";
+import { Plus, Pencil, Trash2, X, Package } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { categories as initialCategories } from "@/data/categories";
 import { products } from "@/data/products";
+import type { Category } from "@/types";
 import { Card } from "@/components/ui/Card";
 import { Button } from "@/components/ui/Button";
 import { Input } from "@/components/ui/Input";
@@ -61,13 +62,13 @@ export default function Categories() {
     if (editingId) {
       setCats((prev) =>
         prev.map((c) =>
-          c.id === editingId ? { ...c, name: form.name, description: form.description, image: form.image } : c
+          c.id === editingId ? { ...c, name: form.name as Category["name"], description: form.description, image: form.image } : c
         )
       );
     } else {
-      const newCat = {
+      const newCat: Category = {
         id: `cat_${Date.now()}`,
-        name: form.name,
+        name: form.name as Category["name"],
         description: form.description,
         image: form.image,
       };

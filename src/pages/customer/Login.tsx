@@ -1,6 +1,5 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { motion } from "framer-motion";
 import { Mail, Lock, Eye, EyeOff, LogIn, User } from "lucide-react";
 import { PageEntrance, EntranceItem } from "@/components/animations/PageEntrance";
 import { TextReveal } from "@/components/animations/TextReveal";
@@ -8,7 +7,6 @@ import { Button } from "@/components/ui/Button";
 import { Card } from "@/components/ui/Card";
 import { Field, Input } from "@/components/ui/Input";
 import { useSessionStore } from "@/stores/sessionStore";
-import { cn } from "@/lib/utils";
 
 export default function Login() {
   const navigate = useNavigate();

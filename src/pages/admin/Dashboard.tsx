@@ -1,5 +1,3 @@
-import { useState, useEffect, useRef } from "react";
-import { motion } from "framer-motion";
 import {
   BarChart,
   Bar,
@@ -13,16 +11,6 @@ import {
   LineChart,
   Line,
 } from "recharts";
-import {
-  TrendingUp,
-  TrendingDown,
-  ShoppingCart,
-  DollarSign,
-  Users,
-  CalendarDays,
-  Clock,
-  Package,
-} from "lucide-react";
 import { cn } from "@/lib/utils";
 import { formatInr } from "@/lib/utils";
 import { analytics } from "@/data/analytics";
@@ -47,40 +35,6 @@ const CustomTooltip = ({ active, payload, label }: any) => {
     </div>
   );
 };
-
-function AnimatedCounter({ value, prefix = "" }: { value: number; prefix?: string }) {
-  const [display, setDisplay] = useState(0);
-  const ref = useRef<number | null>(null);
-
-  useEffect(() => {
-    const start = 0;
-    const end = value;
-    const duration = 1200;
-    const startTime = performance.now();
-
-    const animate = (now: number) => {
-      const elapsed = now - startTime;
-      const progress = Math.min(elapsed / duration, 1);
-      const eased = 1 - Math.pow(1 - progress, 3);
-      setDisplay(Math.round(start + (end - start) * eased));
-      if (progress < 1) {
-        ref.current = requestAnimationFrame(animate);
-      }
-    };
-
-    ref.current = requestAnimationFrame(animate);
-    return () => {
-      if (ref.current) cancelAnimationFrame(ref.current);
-    };
-  }, [value]);
-
-  return (
-    <span>
-      {prefix}
-      {display.toLocaleString("en-IN")}
-    </span>
-  );
-}
 
 const statusColors: Record<string, string> = {
   new: "bg-yellow-500/15 text-yellow-500 border-yellow-500/30",

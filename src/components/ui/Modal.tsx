@@ -10,7 +10,7 @@ export function Modal({
 }: {
   open: boolean;
   onClose: () => void;
-  title: string;
+  title?: string;
   children: ReactNode;
 }) {
   return (
@@ -26,16 +26,13 @@ export function Modal({
           <motion.div
             role="dialog"
             aria-modal
-            aria-labelledby="modal-title"
             initial={{ y: 24, scale: 0.98, opacity: 0 }}
             animate={{ y: 0, scale: 1, opacity: 1 }}
             exit={{ y: 12, opacity: 0 }}
             className="relative w-full max-w-lg border border-[var(--border)] bg-[var(--card)] p-6"
           >
             <div className="mb-4 flex items-center justify-between">
-              <h2 id="modal-title" className="font-display text-2xl">
-                {title}
-              </h2>
+              {title ? <h2 className="font-display text-2xl">{title}</h2> : <span />}
               <button onClick={onClose} aria-label="Close dialog">
                 <X size={18} />
               </button>
@@ -56,7 +53,7 @@ export function Drawer({
 }: {
   open: boolean;
   onClose: () => void;
-  title: string;
+  title?: string;
   children: ReactNode;
 }) {
   return (

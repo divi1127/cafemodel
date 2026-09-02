@@ -1,10 +1,7 @@
 import { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
 import {
-  Search,
   X,
   ChevronRight,
-  Clock,
   CheckCircle2,
   XCircle,
   ChefHat,
@@ -14,7 +11,7 @@ import {
 import { cn } from "@/lib/utils";
 import { formatInr } from "@/lib/utils";
 import { orders as allOrders } from "@/data/orders";
-import type { Order } from "@/data/orders";
+import type { Order } from "@/types";
 import { useOrderStore } from "@/stores/orderStore";
 import { Card } from "@/components/ui/Card";
 import { Badge } from "@/components/ui/Card";
@@ -76,51 +73,55 @@ export default function Orders() {
     }
   };
 
-  const columns = [
+  const columns: {
+    key: string;
+    header: string;
+    render?: (row: Order) => React.ReactNode;
+  }[] = [
     {
       key: "number",
       header: "#",
-      render: (v: string) => <span className="font-mono text-[var(--muted-foreground)]">{v}</span>,
+      render: (row) => <span className="font-mono text-[var(--muted-foreground)]">{row.number}</span>,
     },
     { key: "customerName", header: "Customer" },
     {
       key: "items",
       header: "Items",
-      render: (_: any, row: Order) => (
+      render: (row) => (
         <span className="text-[var(--muted-foreground)]">{row.items.length} items</span>
       ),
     },
     {
       key: "total",
       header: "Total",
-      render: (v: number) => <span className="font-medium">{formatInr(v)}</span>,
+      render: (row) => <span className="font-medium">{formatInr(row.total)}</span>,
     },
     {
       key: "status",
       header: "Status",
-      render: (v: string) => (
-        <Badge className={cn("inline-flex items-center gap-1 capitalize", statusStyles[v] ?? statusStyles.new)}>
-          {statusIcons[v]}
-          {v}
+      render: (row) => (
+        <Badge className={cn("inline-flex items-center gap-1 capitalize", statusStyles[row.status] ?? statusStyles.new)}>
+          {statusIcons[row.status]}
+          {row.status}
         </Badge>
       ),
     },
     {
       key: "fulfillment",
       header: "Type",
-      render: (v: string) => (
-        <span className="capitalize text-[var(--muted-foreground)]">{v}</span>
+      render: (row) => (
+        <span className="capitalize text-[var(--muted-foreground)]">{row.fulfillment}</span>
       ),
     },
     {
       key: "createdAt",
       header: "Time",
-      render: (v: string) => <span className="text-[var(--muted-foreground)]">{v}</span>,
+      render: (row) => <span className="text-[var(--muted-foreground)]">{row.createdAt}</span>,
     },
     {
       key: "actions",
       header: "Actions",
-      render: (_: any, row: Order) => (
+      render: (row) => (
         <Button variant="ghost" className="h-8 px-2 text-xs" onClick={() => setSelected(row)}>
           View
           <ChevronRight className="ml-1 h-3.5 w-3.5" />

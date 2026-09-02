@@ -1,7 +1,5 @@
 import { useState } from "react";
-import { motion } from "framer-motion";
 import {
-  Settings as SettingsIcon,
   Sun,
   Moon,
   Bell,

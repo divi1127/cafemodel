@@ -54,7 +54,6 @@ const statusColor: Record<string, string> = {
 
 function DashboardTab({ customer }: { customer: ReturnType<typeof customers.find> }) {
   const favIds = useFavoritesStore((s) => s.ids);
-  const orders = useOrderStore((s) => s.orders);
 
   const stats = [
     { label: "Total Orders", value: customer?.orders ?? 0, icon: <Package size={20} /> },

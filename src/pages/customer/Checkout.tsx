@@ -19,11 +19,10 @@ import {
 } from "lucide-react";
 import { PageEntrance, EntranceItem } from "@/components/animations/PageEntrance";
 import { ScrollReveal } from "@/components/animations/ScrollReveal";
-import { TextReveal } from "@/components/animations/TextReveal";
 import { MagneticButton } from "@/components/animations/MagneticButton";
 import { Button } from "@/components/ui/Button";
 import { Card } from "@/components/ui/Card";
-import { Field, Input, Textarea, Select } from "@/components/ui/Input";
+import { Field, Input, Textarea } from "@/components/ui/Input";
 import { useCartStore } from "@/stores/cartStore";
 import { useOrderStore } from "@/stores/orderStore";
 import { useSessionStore } from "@/stores/sessionStore";

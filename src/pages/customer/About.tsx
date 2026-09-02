@@ -18,7 +18,7 @@ const teamMembers = [
   {
     name: "Priya Sharma",
     role: "Head Barista",
-    image: IMG.barista,
+    image: IMG.espresso,
     bio: "National latte art champion. Priya's passion for perfection ensures every cup that leaves our bar is exceptional.",
   },
   {
@@ -284,7 +284,7 @@ export default function About() {
             </div>
           </ScrollReveal>
           <div className="grid grid-cols-2 lg:grid-cols-3 gap-4">
-            {[IMG.interior, IMG.latte, IMG.pastries, IMG.pour, IMG.cold, IMG.espresso].map(
+            {[IMG.interior, IMG.latte, IMG.pastry, IMG.pour, IMG.cold, IMG.espresso].map(
               (src, i) => (
                 <ScrollReveal key={i} delay={i * 0.08}>
                   <motion.div

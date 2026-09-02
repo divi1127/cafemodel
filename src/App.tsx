@@ -3,7 +3,7 @@ import { Routes, Route } from "react-router-dom";
 import { CustomerLayout } from "@/components/layout/CustomerLayout";
 import { AdminLayout } from "@/components/layout/AdminLayout";
 import { PosLayout, KitchenLayout } from "@/components/layout/OpsLayout";
-import { Skeleton } from "@/components/ui/Card";
+
 
 const Home = lazy(() => import("@/pages/customer/Home"));
 const About = lazy(() => import("@/pages/customer/About"));

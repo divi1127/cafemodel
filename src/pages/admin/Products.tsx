@@ -18,6 +18,7 @@ import { cn } from "@/lib/utils";
 import { formatInr } from "@/lib/utils";
 import { products as initialProducts } from "@/data/products";
 import { categories } from "@/data/categories";
+import type { Product } from "@/types";
 import { Card } from "@/components/ui/Card";
 import { Badge } from "@/components/ui/Card";
 import { Button } from "@/components/ui/Button";
@@ -129,23 +130,29 @@ export default function Products() {
       setLocalProducts((prev) =>
         prev.map((p) =>
           p.id === editingId
-            ? { ...p, name: form.name, category: form.category, price, available: form.available, bestseller: form.bestseller }
+            ? { ...p, name: form.name, category: form.category as Product["category"], price, available: form.available, bestseller: form.bestseller }
             : p
         )
       );
     } else {
-      const newProduct = {
+      const newProduct: Product = {
         id: `prod_${Date.now()}`,
         name: form.name,
         slug: form.name.toLowerCase().replace(/\s+/g, "-"),
-        category: form.category,
+        category: form.category as Product["category"],
         price,
         rating: 0,
         reviews: 0,
         image: form.image || "/placeholder.jpg",
+        gallery: [],
         bestseller: form.bestseller,
         available: form.available,
         discount: 0,
+        description: "",
+        longDescription: "",
+        addons: [],
+        variants: [],
+        tags: [],
       };
       setLocalProducts((prev) => [newProduct, ...prev]);
     }
@@ -273,7 +280,7 @@ export default function Products() {
                               <span className="font-medium text-[var(--foreground)]">
                                 {product.name}
                               </span>
-                              {product.discount > 0 && (
+                              {(product.discount ?? 0) > 0 && (
                                 <Badge className="ml-2 bg-[var(--success)]/10 text-[var(--success)] border-[var(--success)]/20 text-[10px]">
                                   {product.discount}% off
                                 </Badge>

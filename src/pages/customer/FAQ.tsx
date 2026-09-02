@@ -8,7 +8,6 @@ import { TextReveal } from "@/components/animations/TextReveal";
 import { AnimatedBackground } from "@/components/animations/AnimatedBackground";
 import { MagneticButton } from "@/components/animations/MagneticButton";
 import { Button } from "@/components/ui/Button";
-import { Card } from "@/components/ui/Card";
 import { faqs } from "@/data/analytics";
 import { cn } from "@/lib/utils";
 
@@ -128,17 +127,19 @@ export default function FAQ() {
             </p>
             <div className="flex flex-wrap justify-center gap-4 pt-6">
               <MagneticButton strength={0.3}>
-                <Button asChild variant="primary" className="px-8">
-                  <Link to="/contact">
+                <Link to="/contact">
+                  <Button variant="primary" className="px-8">
                     Contact Us
                     <ArrowRight className="ml-2 h-4 w-4" />
-                  </Link>
-                </Button>
+                  </Button>
+                </Link>
               </MagneticButton>
               <MagneticButton strength={0.3}>
-                <Button asChild variant="ghost" className="px-8 border border-[var(--border)]">
-                  <a href="tel:+912245678900">Call Us</a>
-                </Button>
+                <a href="tel:+912245678900">
+                  <Button variant="ghost" className="px-8 border border-[var(--border)]">
+                    Call Us
+                  </Button>
+                </a>
               </MagneticButton>
             </div>
           </ScrollReveal>

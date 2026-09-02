@@ -3,8 +3,6 @@ import { motion, AnimatePresence } from "framer-motion";
 import { X, ChevronLeft, ChevronRight, ZoomIn } from "lucide-react";
 import { PageEntrance, EntranceItem } from "@/components/animations/PageEntrance";
 import { ScrollReveal } from "@/components/animations/ScrollReveal";
-import { TextReveal } from "@/components/animations/TextReveal";
-import { ParallaxImage } from "@/components/animations/ParallaxImage";
 import { AnimatedBackground } from "@/components/animations/AnimatedBackground";
 import { gallery } from "@/data/analytics";
 import { cn } from "@/lib/utils";

@@ -18,7 +18,8 @@ import { Field, Input, Textarea, Select } from "@/components/ui/Input";
 import { Modal } from "@/components/ui/Modal";
 import { StatCard } from "@/components/ui/StatCard";
 import { PageEntrance, EntranceItem } from "@/components/animations/PageEntrance";
-import { offers as initialOffers, type Offer } from "@/data/offers";
+import { offers as initialOffers } from "@/data/offers";
+import type { Offer } from "@/types";
 import { uid } from "@/lib/utils";
 
 const typeBadgeVariant: Record<string, string> = {
@@ -53,7 +54,7 @@ const emptyOffer: Omit<Offer, "id"> = {
   type: "coupon",
   code: "",
   description: "",
-  value: 0,
+  value: "",
   image: "",
   active: true,
   validUntil: "",
@@ -73,7 +74,7 @@ export default function OffersAdmin() {
   ).length;
   const avgDiscount =
     offers.length > 0
-      ? offers.reduce((acc, o) => acc + o.value, 0) / offers.length
+      ? offers.reduce((acc, o) => acc + (parseFloat(o.value) || 0), 0) / offers.length
       : 0;
 
   const filtered = offers.filter((o) => {
@@ -82,7 +83,7 @@ export default function OffersAdmin() {
     if (
       search &&
       !o.title.toLowerCase().includes(search.toLowerCase()) &&
-      !o.code.toLowerCase().includes(search.toLowerCase())
+      !(o.code ?? "").toLowerCase().includes(search.toLowerCase())
     )
       return false;
     return true;
@@ -321,7 +322,7 @@ export default function OffersAdmin() {
                   type="number"
                   value={form.value}
                   onChange={(e) =>
-                    setForm({ ...form, value: Number(e.target.value) })
+                    setForm({ ...form, value: e.target.value })
                   }
                   placeholder="10"
                 />

@@ -3,7 +3,6 @@ import { motion } from "framer-motion";
 import {
   Star,
   Check,
-  X,
   MessageSquare,
   ThumbsUp,
   ThumbsDown,
@@ -22,7 +21,8 @@ import { Button } from "@/components/ui/Button";
 import { Card, Badge, EmptyState } from "@/components/ui/Card";
 import { StatCard } from "@/components/ui/StatCard";
 import { PageEntrance, EntranceItem } from "@/components/animations/PageEntrance";
-import { reviews as initialReviews, type Review } from "@/data/reviews";
+import { reviews as initialReviews } from "@/data/reviews";
+import type { Review } from "@/types";
 import { useOrderStore } from "@/stores/orderStore";
 
 type FilterTab = "all" | "pending" | "approved" | "rejected";

@@ -11,9 +11,7 @@ import {
   UserCog,
   FileText,
   Calculator,
-  Calendar,
   Download,
-  Filter,
   FileBarChart,
 } from "lucide-react";
 import {
@@ -26,8 +24,6 @@ import {
   PieChart,
   Pie,
   Cell,
-  LineChart,
-  Line,
 } from "recharts";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/Button";
@@ -87,8 +83,6 @@ const taxData = [
   { period: "Q1", collected: 126000, paid: 42000, net: 84000 },
   { period: "Q2", collected: 153000, paid: 51000, net: 102000 },
 ];
-
-const chartColors = ["#f59e0b", "#3b82f6", "#10b981", "#8b5cf6", "#ef4444"];
 
 function CustomTooltip({ active, payload, label }: any) {
   if (!active || !payload?.length) return null;

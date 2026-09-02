@@ -5,20 +5,16 @@ import {
   Pencil,
   Trash2,
   Star,
-  TrendingUp,
-  Package,
-  Tag,
   ToggleLeft,
   ToggleRight,
   Crown,
-  Search,
   X,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { formatInr } from "@/lib/utils";
 import { products } from "@/data/products";
 import { categories } from "@/data/categories";
-import { useUiStore } from "@/stores/uiStore";
+import type { Product } from "@/types";
 import { Card } from "@/components/ui/Card";
 import { Badge } from "@/components/ui/Card";
 import { Button } from "@/components/ui/Button";
@@ -98,23 +94,29 @@ export default function AdminMenu() {
       setLocalProducts((prev) =>
         prev.map((p) =>
           p.id === editingId
-            ? { ...p, name: form.name, category: form.category, price, available: form.available, bestseller: form.bestseller }
+            ? { ...p, name: form.name, category: form.category as Product["category"], price, available: form.available, bestseller: form.bestseller }
             : p
         )
       );
     } else {
-      const newProduct = {
+      const newProduct: Product = {
         id: `prod_${Date.now()}`,
         name: form.name,
         slug: form.name.toLowerCase().replace(/\s+/g, "-"),
-        category: form.category,
+        category: form.category as Product["category"],
         price,
         rating: 0,
         reviews: 0,
         image: form.image || "/placeholder.jpg",
+        gallery: [],
         bestseller: form.bestseller,
         available: form.available,
         discount: 0,
+        description: form.description,
+        longDescription: "",
+        addons: [],
+        variants: [],
+        tags: [],
       };
       setLocalProducts((prev) => [newProduct, ...prev]);
     }

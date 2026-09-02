@@ -155,16 +155,15 @@ export default function Events() {
                         {/* CTA */}
                         {!isPast && (
                           <MagneticButton strength={0.2}>
-                            <Button
-                              asChild
-                              variant="ghost"
-                              className="w-full justify-center border border-[var(--border)] group-hover:border-[var(--primary)]/50"
-                            >
-                              <Link to="/reservations">
+                            <Link to="/reservations">
+                              <Button
+                                variant="ghost"
+                                className="w-full justify-center border border-[var(--border)] group-hover:border-[var(--primary)]/50"
+                              >
                                 Reserve for this Event
                                 <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
-                              </Link>
-                            </Button>
+                              </Button>
+                            </Link>
                           </MagneticButton>
                         )}
                       </div>
@@ -194,12 +193,12 @@ export default function Events() {
             </p>
             <div className="flex flex-wrap justify-center gap-4 pt-6">
               <MagneticButton strength={0.3}>
-                <Button asChild variant="primary" className="px-8">
-                  <Link to="/contact">
+                <Link to="/contact">
+                  <Button variant="primary" className="px-8">
                     Get in Touch
                     <ArrowRight className="ml-2 h-4 w-4" />
-                  </Link>
-                </Button>
+                  </Button>
+                </Link>
               </MagneticButton>
             </div>
           </ScrollReveal>

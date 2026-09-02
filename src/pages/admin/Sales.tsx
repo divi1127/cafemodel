@@ -14,13 +14,11 @@ import {
   AreaChart,
   Area,
 } from "recharts";
-import { Calendar, TrendingUp, DollarSign, ShoppingCart, Users } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { formatInr } from "@/lib/utils";
 import { analytics } from "@/data/analytics";
 import { Card } from "@/components/ui/Card";
 import { Badge } from "@/components/ui/Card";
-import { Button } from "@/components/ui/Button";
 import { StatCard } from "@/components/ui/StatCard";
 import { PageEntrance, EntranceItem } from "@/components/animations/PageEntrance";
 

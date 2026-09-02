@@ -6,7 +6,6 @@ import {
   Crown,
   Landmark,
   Gift,
-  Clock,
   ArrowRight,
   Check,
   Sparkles,
@@ -21,7 +20,7 @@ import { Button } from "@/components/ui/Button";
 import { Card, Badge } from "@/components/ui/Card";
 import { useSessionStore } from "@/stores/sessionStore";
 import { customers } from "@/data/customers";
-import { cn, formatInr } from "@/lib/utils";
+import { cn } from "@/lib/utils";
 
 const tiers = [
   { name: "Bean", icon: <Coffee size={20} />, min: 0, color: "from-amber-700 to-amber-900", border: "border-amber-700/40", text: "text-amber-400" },
@@ -268,7 +267,7 @@ export default function Loyalty() {
               Points History
             </h2>
             <Card className="divide-y divide-[var(--border)]">
-              {pointsHistory.map((entry, i) => (
+              {pointsHistory.map((entry) => (
                 <div key={entry.id} className="flex items-center justify-between px-6 py-4">
                   <div className="flex items-center gap-4">
                     <div className={cn(

@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
-import { Heart, ArrowRight } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import { PageEntrance, EntranceItem } from "@/components/animations/PageEntrance";
 import { ScrollReveal } from "@/components/animations/ScrollReveal";
 import { TextReveal } from "@/components/animations/TextReveal";
@@ -39,12 +39,12 @@ export default function Favorites() {
               title="No favorites yet"
               body="Tap the heart icon on any menu item to save it here for quick access."
               action={
-                <Button asChild variant="primary">
-                  <Link to="/menu">
+                <Link to="/menu">
+                  <Button variant="primary">
                     Explore Menu
                     <ArrowRight size={16} />
-                  </Link>
-                </Button>
+                  </Button>
+                </Link>
               }
             />
           </EntranceItem>

@@ -11,7 +11,7 @@ import { Card, EmptyState } from "@/components/ui/Card";
 import { Field, Input } from "@/components/ui/Input";
 import { useCartStore } from "@/stores/cartStore";
 import { products } from "@/data/products";
-import { cn, formatInr } from "@/lib/utils";
+import { formatInr } from "@/lib/utils";
 
 export default function Cart() {
   const lines = useCartStore((s) => s.lines);
